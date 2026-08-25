@@ -46,5 +46,19 @@ const { data } = Astro.props;
         </a>
       </div>
     </div>
+
+    <div class="contact-map">
+      <iframe
+        src={data.mapEmbedUrl}
+        title={`Mapa dojazdu – ${data.name}, ${data.address.street}`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+      <a href={data.mapUrl} target="_blank" rel="noreferrer">
+        Otwórz trasę w Google Maps
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </div>
 </section>

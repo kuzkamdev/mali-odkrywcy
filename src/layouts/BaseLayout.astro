@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import MobileContactBar from "../components/shared/MobileContactBar.astro";
 import SiteFooter from "../components/shared/SiteFooter.astro";
 import SiteHeader from "../components/shared/SiteHeader.astro";
 import type { ContactData, NavigationItem } from "../types/content";
@@ -13,6 +14,38 @@ interface Props {
 }
 
 const { title, description, siteName, navigation, contact } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImageUrl = new URL(
+  "/images/brand/mali-odkrywcy-logo.png",
+  Astro.site ?? Astro.url.origin,
+);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ChildCare",
+  name: siteName,
+  description,
+  url: new URL("/", Astro.site ?? Astro.url.origin).href,
+  logo: socialImageUrl.href,
+  image: socialImageUrl.href,
+  telephone: contact.phone,
+  email: contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: contact.address.street.replace(/^ul\.\s*/i, ""),
+    postalCode: contact.address.postalCode,
+    addressLocality: contact.address.city,
+    addressRegion: "mazowieckie",
+    addressCountry: "PL",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 52.2896118,
+    longitude: 21.0632837,
+  },
+  areaServed: ["Targówek", "Warszawa"],
+  hasMap: contact.mapUrl,
+  sameAs: [contact.facebookUrl],
+};
 ---
 
 <!doctype html>
@@ -21,7 +54,26 @@ const { title, description, siteName, navigation, contact } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#5b6541" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="2000" />
+    <meta property="og:image:alt" content={`Logo ${siteName}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <title>{title}</title>
   </head>
   <body>
@@ -31,5 +83,6 @@ const { title, description, siteName, navigation, contact } = Astro.props;
       <slot />
     </main>
     <SiteFooter siteName={siteName} navigation={navigation} contact={contact} />
+    <MobileContactBar contact={contact} />
   </body>
 </html>

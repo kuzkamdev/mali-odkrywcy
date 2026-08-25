@@ -117,6 +117,7 @@ export interface ContactData extends SectionContent {
   facebookUrl: string;
   messengerUrl: string;
   mapUrl: string;
+  mapEmbedUrl: string;
   action: LinkAction;
 }
 

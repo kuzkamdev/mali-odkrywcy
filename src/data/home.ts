@@ -183,6 +183,8 @@ export const homePageData = {
       "https://www.facebook.com/messages/t/MaliOdkrywcyOpiekaNadDziecmi/",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=Czerwińska+26%2C+03-661+Warszawa",
+    mapEmbedUrl:
+      "https://www.google.com/maps?q=Czerwińska+26%2C+03-661+Warszawa&output=embed",
     action: {
       label: "Napisz na Messengerze",
       url: "https://www.facebook.com/messages/t/MaliOdkrywcyOpiekaNadDziecmi/",

@@ -50,6 +50,7 @@ body {
   overflow-x: hidden;
   color: var(--ink);
   background: var(--cream);
+  padding-block-end: calc(4.6rem + env(safe-area-inset-bottom));
   text-rendering: optimizeLegibility;
 }
 
@@ -1186,6 +1187,90 @@ svg {
   font-weight: 750;
 }
 
+.contact-map {
+  position: relative;
+  grid-column: 1 / -1;
+  min-height: 21rem;
+  overflow: hidden;
+  border: 0.0625rem solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--cream-deep);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(21rem, 55vw, 31rem);
+  border: 0;
+  filter: saturate(0.72) sepia(0.08);
+}
+
+.contact-map > a {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 999px;
+  color: var(--forest-dark);
+  background: rgba(253, 251, 247, 0.94);
+  box-shadow: 0 0.6rem 1.8rem rgba(60, 69, 44, 0.14);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  backdrop-filter: blur(0.5rem);
+}
+
+/* Mobile contact */
+
+.mobile-contact-bar {
+  position: fixed;
+  z-index: 60;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+  border-top: 0.0625rem solid rgba(49, 56, 42, 0.14);
+  background: rgba(253, 251, 247, 0.96);
+  box-shadow: 0 -0.6rem 2rem rgba(60, 69, 44, 0.1);
+  backdrop-filter: blur(1rem);
+}
+
+.mobile-contact-bar a {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 0.1rem solid var(--forest);
+  border-radius: 999px;
+  color: white;
+  background: var(--forest);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.mobile-contact-bar a:last-child {
+  color: var(--forest);
+  background: transparent;
+}
+
+.mobile-contact-bar svg {
+  width: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
 .text-link {
   display: inline-flex;
   gap: 0.4rem;
@@ -1288,11 +1373,19 @@ svg {
 }
 
 @media (min-width: 52rem) {
+  body {
+    padding-block-end: 0;
+  }
+
   .section {
     padding-block: var(--space-8);
   }
 
   .mobile-menu {
+    display: none;
+  }
+
+  .mobile-contact-bar {
     display: none;
   }
 
