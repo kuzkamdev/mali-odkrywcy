@@ -1,0 +1,35 @@
+---
+import type { NavigationItem } from "../../types/content";
+
+interface Props {
+  siteName: string;
+  navigation: NavigationItem[];
+}
+
+const { siteName, navigation } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="#top" aria-label={`${siteName} – strona główna`}>
+      <span class="brand__mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span>{siteName}</span>
+    </a>
+
+    <details class="mobile-menu">
+      <summary aria-label="Otwórz menu">
+        <span></span><span></span><span></span>
+      </summary>
+      <nav aria-label="Główna nawigacja">
+        {navigation.map((item) => <a href={item.url}>{item.label}</a>)}
+      </nav>
+    </details>
+
+    <nav class="desktop-nav" aria-label="Główna nawigacja">
+      {navigation.map((item) => <a href={item.url}>{item.label}</a>)}
+    </nav>
+  </div>
+</header>
+

@@ -1,0 +1,48 @@
+---
+import type { DiscoveryData } from "../../types/content";
+import SectionHeading from "../shared/SectionHeading.astro";
+
+interface Props {
+  data: DiscoveryData;
+}
+
+const { data } = Astro.props;
+const items = data.items.filter((item) => item.enabled);
+---
+
+<section class="section discovery" id="jak-odkrywamy">
+  <div class="container">
+    <SectionHeading
+      eyebrow={data.eyebrow}
+      title={data.title}
+      description={data.description}
+      align="center"
+    />
+    <div class="discovery__grid">
+      {items.map((item, index) => (
+        <article class:list={["discovery-card", `discovery-card--${index + 1}`]}>
+          <div class="discovery-card__icon" aria-hidden="true">
+            {item.icon === "shield" && (
+              <svg viewBox="0 0 48 48"><path d="M24 5 39 11v11c0 10-6 17-15 21C15 39 9 32 9 22V11l15-6Z" /><path d="m17 24 5 5 10-11" /></svg>
+            )}
+            {item.icon === "leaf" && (
+              <svg viewBox="0 0 48 48"><path d="M39 8C23 9 12 17 11 33c16 2 27-8 28-25Z" /><path d="M9 40c7-11 15-17 25-24" /></svg>
+            )}
+            {item.icon === "sprout" && (
+              <svg viewBox="0 0 48 48"><path d="M24 42V19" /><path d="M24 25C13 25 9 18 9 10c10 0 15 5 15 15Z" /><path d="M24 31c11 0 15-7 15-15-10 0-15 5-15 15Z" /><path d="M12 42h24" /></svg>
+            )}
+            {item.icon === "chat" && (
+              <svg viewBox="0 0 48 48"><path d="M7 11h28v20H20l-8 7v-7H7V11Z" /><path d="M21 17h20v17h-5v6l-7-6" /></svg>
+            )}
+            {item.icon === "search" && (
+              <svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13" /><path d="m31 31 10 10" /><path d="M18 21c4-4 8-4 12-4" /></svg>
+            )}
+          </div>
+          <p class="discovery-card__number">0{index + 1}</p>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

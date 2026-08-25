@@ -1,0 +1,41 @@
+---
+import type { HeroData } from "../../types/content";
+import ButtonLink from "../shared/ButtonLink.astro";
+
+interface Props {
+  data: HeroData;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h1>{data.title}</h1>
+      <p class="hero__description">{data.description}</p>
+      <div class="hero__actions">
+        <ButtonLink action={data.primaryAction} />
+        <ButtonLink action={data.secondaryAction} variant="secondary" />
+      </div>
+      <p class="hero__location">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" />
+          <circle cx="12" cy="9" r="2.5" />
+        </svg>
+        {data.locationLabel}
+      </p>
+    </div>
+
+    <figure class="hero-brand">
+      <img
+        src="/images/brand/mali-odkrywcy-logo.png"
+        alt="Logo Mali Odkrywcy – dwoje dzieci sadzących roślinę"
+        width="2000"
+        height="2000"
+      />
+    </figure>
+  </div>
+  <div class="hero__wave" aria-hidden="true"></div>
+</section>

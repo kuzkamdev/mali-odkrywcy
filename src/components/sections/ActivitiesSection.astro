@@ -1,0 +1,32 @@
+---
+import type { ActivitiesData } from "../../types/content";
+import SectionHeading from "../shared/SectionHeading.astro";
+
+interface Props {
+  data: ActivitiesData;
+}
+
+const { data } = Astro.props;
+const items = data.items.filter((item) => item.enabled);
+---
+
+{data.enabled && items.length > 0 && (
+  <section class="section activities" id="zajecia">
+    <div class="container">
+      <SectionHeading
+        eyebrow={data.eyebrow}
+        title={data.title}
+        description={data.description}
+      />
+      <div class="activities__grid">
+        {items.map((item) => (
+          <article>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+

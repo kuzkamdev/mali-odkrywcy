@@ -1,0 +1,25 @@
+---
+import type { RecruitmentData } from "../../types/content";
+import ButtonLink from "../shared/ButtonLink.astro";
+
+interface Props {
+  data: RecruitmentData;
+}
+
+const { data } = Astro.props;
+---
+
+<section class:list={["recruitment", `recruitment--${data.status}`]} id="rekrutacja">
+  <div class="container recruitment__inner">
+    <div class="recruitment__mark" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="recruitment__copy">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h2>{data.title}</h2>
+      <p>{data.description}</p>
+    </div>
+    <ButtonLink action={data.action} variant="light" />
+  </div>
+</section>
+

@@ -1,0 +1,42 @@
+---
+import type { ContactData, NavigationItem } from "../../types/content";
+
+interface Props {
+  siteName: string;
+  navigation: NavigationItem[];
+  contact: ContactData;
+}
+
+const { siteName, navigation, contact } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <a class="brand brand--footer" href="#top">
+        <span class="brand__mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span>{siteName}</span>
+      </a>
+      <p class="site-footer__note">Blisko natury. Blisko dziecka.</p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Nawigacja w stopce">
+      {navigation.map((item) => <a href={item.url}>{item.label}</a>)}
+    </nav>
+
+    <address>
+      <strong>{contact.address.street}</strong><br />
+      {contact.address.postalCode} {contact.address.city}<br />
+      {contact.address.district}
+      {contact.phone && <><br /><a href={`tel:${contact.phone.replaceAll(" ", "")}`}>{contact.phone}</a></>}
+      {contact.email && <><br /><a href={`mailto:${contact.email}`}>{contact.email}</a></>}
+    </address>
+  </div>
+  <div class="container site-footer__bottom">
+    <span>© {year} {siteName}</span>
+    <a href={contact.facebookUrl} target="_blank" rel="noreferrer">Facebook</a>
+  </div>
+</footer>

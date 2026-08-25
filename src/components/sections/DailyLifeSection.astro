@@ -1,0 +1,41 @@
+---
+import type { DailyLifeData } from "../../types/content";
+import ButtonLink from "../shared/ButtonLink.astro";
+import SectionHeading from "../shared/SectionHeading.astro";
+
+interface Props {
+  data: DailyLifeData;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="section daily-life" id="codziennosc">
+  <div class="container">
+    <div class="daily-life__header">
+      <SectionHeading
+        eyebrow={data.eyebrow}
+        title={data.title}
+        description={data.description}
+      />
+      <ButtonLink action={data.action} variant="secondary" />
+    </div>
+    <div class="daily-life__grid">
+      {data.cards.map((card, index) => (
+        <article class:list={["daily-card", `daily-card--${index + 1}`]}>
+          <div class="daily-card__visual" aria-hidden="true">
+            <span class="daily-card__shape"></span>
+            <span class="daily-card__shape"></span>
+            <span class="daily-card__shape"></span>
+          </div>
+          <div class="daily-card__copy">
+            <span>{card.number}</span>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+

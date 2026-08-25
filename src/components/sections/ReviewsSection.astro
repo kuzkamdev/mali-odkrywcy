@@ -1,0 +1,62 @@
+---
+import type { ReviewsData } from "../../types/content";
+import ButtonLink from "../shared/ButtonLink.astro";
+import SectionHeading from "../shared/SectionHeading.astro";
+
+interface Props {
+  data: ReviewsData;
+}
+
+const { data } = Astro.props;
+const formattedRating = data.rating.toLocaleString("pl-PL", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+});
+const retrievedDate = new Intl.DateTimeFormat("pl-PL").format(
+  new Date(`${data.retrievedAt}T12:00:00`),
+);
+---
+
+<section class="section reviews" id="opinie">
+  <div class="container">
+    <div class="reviews__header">
+      <SectionHeading
+        eyebrow={data.eyebrow}
+        title={data.title}
+        description={data.description}
+      />
+
+      <div class="reviews-score" aria-label={`${formattedRating} na 5, ${data.reviewCount} opinii`}>
+        <strong>{formattedRating}</strong>
+        <div>
+          <span class="reviews-score__stars" aria-hidden="true">★★★★★</span>
+          <p>{data.reviewCount} opinii w Google</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews__grid">
+      {data.reviews.map((review) => (
+        <figure class="review-card">
+          <div class="review-card__stars" aria-label={`${review.rating} na 5 gwiazdek`}>
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„{review.excerpt}”</blockquote>
+          <figcaption>
+            <span class="review-card__avatar" aria-hidden="true">{review.author.charAt(0)}</span>
+            <div>
+              <strong>{review.author}</strong>
+              <span>opinia w Google</span>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <footer class="reviews__footer">
+      <p>{data.sourceLabel} · stan na {retrievedDate}</p>
+      <ButtonLink action={data.action} variant="secondary" />
+    </footer>
+  </div>
+</section>
+

@@ -1,0 +1,23 @@
+---
+import type { LinkAction } from "../../types/content";
+
+interface Props {
+  action: LinkAction;
+  variant?: "primary" | "secondary" | "light";
+}
+
+const { action, variant = "primary" } = Astro.props;
+---
+
+<a
+  class:list={["button-link", `button-link--${variant}`]}
+  href={action.url}
+  target={action.external ? "_blank" : undefined}
+  rel={action.external ? "noreferrer" : undefined}
+>
+  <span>{action.label}</span>
+  <svg aria-hidden="true" viewBox="0 0 20 20">
+    <path d="M4 10h11M11 6l4 4-4 4" />
+  </svg>
+</a>
+

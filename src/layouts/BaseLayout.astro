@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+import SiteFooter from "../components/shared/SiteFooter.astro";
+import SiteHeader from "../components/shared/SiteHeader.astro";
+import type { ContactData, NavigationItem } from "../types/content";
+
+interface Props {
+  title: string;
+  description: string;
+  siteName: string;
+  navigation: NavigationItem[];
+  contact: ContactData;
+}
+
+const { title, description, siteName, navigation, contact } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Przejdź do treści</a>
+    <SiteHeader siteName={siteName} navigation={navigation} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter siteName={siteName} navigation={navigation} contact={contact} />
+  </body>
+</html>

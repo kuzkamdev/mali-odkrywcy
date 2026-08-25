@@ -1,0 +1,28 @@
+---
+import type { AboutData } from "../../types/content";
+import SectionHeading from "../shared/SectionHeading.astro";
+
+interface Props {
+  data: AboutData;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="section about" id="o-nas">
+  <div class="container about__grid">
+    <SectionHeading
+      eyebrow={data.eyebrow}
+      title={data.title}
+      description={data.description}
+    />
+    <div class="about__copy">
+      <p class="about__lead">{data.lead}</p>
+      <p>{data.body}</p>
+      <ul class="pill-list" aria-label="Nasze wartości">
+        {data.highlights.map((highlight) => <li>{highlight}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
