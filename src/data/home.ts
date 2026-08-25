@@ -179,14 +179,13 @@ export const homePageData = {
     phone: "510 524 062",
     email: "kontakt@mali-odkrywcy.pl",
     facebookUrl,
-    messengerUrl: "https://m.me/MaliOdkrywcyOpiekaNadDziecmi",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=Czerwińska+26%2C+03-661+Warszawa",
     mapEmbedUrl:
       "https://www.google.com/maps?q=Czerwińska+26%2C+03-661+Warszawa&output=embed",
     action: {
-      label: "Napisz na Messengerze",
-      url: "https://m.me/MaliOdkrywcyOpiekaNadDziecmi",
+      label: "Odwiedź nas na Facebooku",
+      url: facebookUrl,
       external: true,
     },
   },

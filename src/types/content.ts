@@ -115,7 +115,6 @@ export interface ContactData extends SectionContent {
   email?: string;
   openingHours?: OpeningHours[];
   facebookUrl: string;
-  messengerUrl: string;
   mapUrl: string;
   mapEmbedUrl: string;
   action: LinkAction;
